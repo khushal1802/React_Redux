@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "productName": "watch",
+      "price": 200,
+      "id": 1
+    },
+    {
+      "productName": "ring",
+      "price": 200,
+      "id": 2
+    },
+    {
+      "productName": "Helolo",
+      "price": "123",
+      "id": 3
+    },
+    {
+      "productName": "mobile",
+      "price": "123",
+      "id": 4
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
