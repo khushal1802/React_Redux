@@ -47,7 +47,7 @@ export  function delete_product(action) {
   console.log(action.payload.id);
   return axios.delete(BASE_URL + DELETE_PRODUCT_API + action.payload.id).then((res) => {
     const data = action.payload.id
-    const status = res.status; 
+    const status = res.status;
     return {
         data,
         status,
@@ -65,7 +65,6 @@ export async function put_product(action) {
     .then((res) => {
       const data = res.data;
       const status = res.status;
-      console.log(data, "data..................api");
       return {
         data,
         status,

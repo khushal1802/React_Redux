@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const productReducer = (state = {...initialState}, action) => {
-    console.log("9999999999999 ", action, "reducer");
+    console.log(action, "reducer");
     switch (action.type) {
       //get
       case GET_PRODUCT_PROGRESS:

@@ -40,7 +40,6 @@ const Data = () => {
   };
 
   const handalUpdate = () => {
-    console.log("va[ojd", view);
     dispatch({ type: PUT_PRODUCT_PROGRSS, payload: view });
   };
 
@@ -68,7 +67,7 @@ const Data = () => {
         {product.product?.map((val, ind) => {
           return (
             <div className="col-4" key={ind}>
-              <div class="card" style={{ width: "18rem" }}>
+              <div class="card mt-5" style={{ width: "18rem" }}>
                 <div class="card-body">
                   <h5 class="card-title">{val.productName}</h5>
                   <p class="card-text">{val.price}</p>
