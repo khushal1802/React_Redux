@@ -4,14 +4,14 @@ import {
   DELETE_PRODUCT_API,
   GET_PRODUCT_API,
   POST_PRODUCT_API,
+  PUT_PRODUCT_API,
 } from "../../constant";
 
 // get api
 export async function get_product() {
   return axios
     .get(BASE_URL + GET_PRODUCT_API)
-    .then((res) => {
-      console.log(res, "respons for api");
+    .then((res) => { 
       const data = res.data;
       const status = res.status;
       return {
@@ -28,8 +28,7 @@ export async function get_product() {
 export async function post_product(action) {
   return axios
     .post(BASE_URL + POST_PRODUCT_API, action.payload)
-    .then((res) => {
-      console.log(res, "respons for api");
+    .then((res) => { 
       const data = res.data;
       const status = res.status;
       console.log(data, status, "data state");
@@ -44,12 +43,11 @@ export async function post_product(action) {
 }
 
 // Delete api
-export async function delete_product(action) {
-  console.log(action);
-  return axios.delete(BASE_URL + DELETE_PRODUCT_API + action.id).then((res) => {
-    const data = res.action.id
-    const status = res.status;
-    console.log(data, "data..................api");
+export  function delete_product(action) {
+  console.log(action.payload.id);
+  return axios.delete(BASE_URL + DELETE_PRODUCT_API + action.payload.id).then((res) => {
+    const data = action.payload.id
+    const status = res.status; 
     return {
         data,
         status,
@@ -59,3 +57,22 @@ export async function delete_product(action) {
       console.log(err);
   });
 }
+
+// Post api
+export async function put_product(action) { 
+  return axios
+    .put(BASE_URL + PUT_PRODUCT_API + action.payload.id, action.payload)
+    .then((res) => {
+      const data = res.data;
+      const status = res.status;
+      console.log(data, "data..................api");
+      return {
+        data,
+        status,
+      };
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+

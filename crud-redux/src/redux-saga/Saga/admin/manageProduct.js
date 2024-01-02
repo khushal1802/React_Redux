@@ -1,12 +1,11 @@
-import { DELETE_PRODUCT_ERROR, DELETE_PRODUCT_SUCCESS, GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, POST_PRODUCT_ERROR, POST_PRODUCT_SUCCESS } from "../../Admin/Action/action";
-import { delete_product, get_product, post_product } from "../../Admin/Api/api";
+import { DELETE_PRODUCT_ERROR, DELETE_PRODUCT_SUCCESS, GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, POST_PRODUCT_ERROR, POST_PRODUCT_SUCCESS, PUT_PRODUCT_ERROR, PUT_PRODUCT_SUCCESS } from "../../Admin/Action/action";
+import { delete_product, get_product, post_product, put_product } from "../../Admin/Api/api";
 import { call, put } from "redux-saga/effects";
 
 
 export function* handle_Get_product_api(action) {
     try {
         const res = yield call(get_product, action);
-        console.log(res,"from manageProduct");
         const status = res.status;
         const data = res.data;
 
@@ -22,8 +21,7 @@ export function* handle_Get_product_api(action) {
 
 export function* handle_Post_product_api(action) {
     try {
-        const res = yield call(post_product, action);
-        console.log(res, "from manageproduct......");
+        const res = yield call(post_product, action); 
         const status = res.status;
         const data = res.data;
 
@@ -39,16 +37,32 @@ export function* handle_Post_product_api(action) {
 
 export function* handle_Delete_product_api(action) {
     try {
-        const res = yield call(delete_product, action);
+        const res = yield call(delete_product, action); 
         const status = res.status;
         const data = res.data;
-
-        if (status === 200) {
+        if (status === 201 || status === 200) {
             yield put({type:DELETE_PRODUCT_SUCCESS,data})
         } else {
-            yield put({type:DELETE_PRODUCT_ERROR})
+            yield put({type:DELETE_PRODUCT_ERROR , data})
         }
     } catch (error) {
         yield put({type:DELETE_PRODUCT_ERROR,error})
     }
+}
+
+export function* handle_Put_product_api(action) {
+  try {
+    const res = yield call(put_product, action);
+    console.log(res, "from manageproduct......");
+    const status = res.status;
+    const data = res.data;
+
+    if (status === 200 || status === 201) {
+      yield put({ type: PUT_PRODUCT_SUCCESS, data });
+    } else {
+      yield put({ type: PUT_PRODUCT_ERROR ,  data });
+    }
+  } catch (error) {
+    yield put({ type: PUT_PRODUCT_ERROR, error });
+  }
 }

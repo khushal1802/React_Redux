@@ -1,4 +1,4 @@
-import { DELETE_PRODUCT_ERROR, DELETE_PRODUCT_PROGRSS, DELETE_PRODUCT_SUCCESS, GET_PRODUCT_ERROR, GET_PRODUCT_PROGRESS, GET_PRODUCT_SUCCESS, POST_PRODUCT_ERROR, POST_PRODUCT_PROGRSS, POST_PRODUCT_SUCCESS } from "../Action/action";
+import { DELETE_PRODUCT_ERROR, DELETE_PRODUCT_PROGRSS, DELETE_PRODUCT_SUCCESS, GET_PRODUCT_ERROR, GET_PRODUCT_PROGRESS, GET_PRODUCT_SUCCESS, POST_PRODUCT_ERROR, POST_PRODUCT_PROGRSS, POST_PRODUCT_SUCCESS, PUT_PRODUCT_ERROR, PUT_PRODUCT_PROGRSS, PUT_PRODUCT_SUCCESS } from "../Action/action";
 
 const initialState = {
     product: [],
@@ -6,8 +6,8 @@ const initialState = {
     isError:null
 }
 
-const productReducer = (state = initialState, action) => {
-    console.log(action, "reducer");
+const productReducer = (state = {...initialState}, action) => {
+    console.log("9999999999999 ", action, "reducer");
     switch (action.type) {
       //get
       case GET_PRODUCT_PROGRESS:
@@ -63,14 +63,39 @@ const productReducer = (state = initialState, action) => {
         };
       }
       case DELETE_PRODUCT_SUCCESS: {
+        const FilterDelete = state.product.filter((val) => val.id !== action.data)
+        console.log("hgyeghifgfh", FilterDelete);
         return {
           ...state,
           isLoading: false,
-            product: state.product.filter((val) => val.id!==action.id),
+          product: FilterDelete,
           isError: null,
         };
       }
       case DELETE_PRODUCT_ERROR: {
+        return {
+          ...state,
+          isLoading: false,
+          isError: action.payload,
+        };
+      }
+
+      //Put
+      case PUT_PRODUCT_PROGRSS: {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      }
+      case PUT_PRODUCT_SUCCESS: {
+        return {
+          ...state,
+          isLoading: false,
+          product: state.product.map((state) => state.id === action.data.id ? action.data : state),
+          isError: null,
+        };
+      }
+      case PUT_PRODUCT_ERROR: {
         return {
           ...state,
           isLoading: false,

@@ -1,29 +1,19 @@
 {
   "posts": [
     {
-      "productName": "watch",
-      "price": 200,
-      "id": 1
-    },
-    {
-      "productName": "ring",
-      "price": 200,
-      "id": 2
-    },
-    {
-      "productName": "mobile",
-      "price": 2000,
-      "id": 3
-    },
-    {
-      "productName": "asdfgh",
-      "price": 200,
+      "productName": "  shvd",
+      "price": "nsjdhu",
       "id": 5
     },
     {
-      "productName": "asdfg",
-      "price": "32",
+      "productName": "Khushal  hijch",
+      "price": "vaghasiy",
       "id": 6
+    },
+    {
+      "productName": "Voluptatum et facili",
+      "price": "Id autem la",
+      "id": 7
     }
   ],
   "comments": [],

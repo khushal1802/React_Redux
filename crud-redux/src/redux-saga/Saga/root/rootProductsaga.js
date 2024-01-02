@@ -2,8 +2,9 @@ import {
   DELETE_PRODUCT_PROGRSS,
   GET_PRODUCT_PROGRESS,
   POST_PRODUCT_PROGRSS,
+  PUT_PRODUCT_PROGRSS,
 } from "../../Admin/Action/action";
-import { handle_Delete_product_api, handle_Get_product_api, handle_Post_product_api } from "../admin/manageProduct";
+import { handle_Delete_product_api, handle_Get_product_api, handle_Post_product_api, handle_Put_product_api } from "../admin/manageProduct";
 import { takeLatest } from "@redux-saga/core/effects";
 
 
@@ -17,4 +18,8 @@ export function* post_product_saga() {
 
 export function* delete_product_saga() {
   yield takeLatest(DELETE_PRODUCT_PROGRSS, handle_Delete_product_api);
+}
+
+export function* put_product_saga() {
+  yield takeLatest(PUT_PRODUCT_PROGRSS, handle_Put_product_api);
 }
