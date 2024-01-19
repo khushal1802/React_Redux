@@ -58,7 +58,7 @@ export  function delete_product(action) {
   });
 }
 
-// Post api
+// put api
 export async function put_product(action) { 
   return axios
     .put(BASE_URL + PUT_PRODUCT_API + action.payload.id, action.payload)

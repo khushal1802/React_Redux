@@ -7,8 +7,4 @@ export const userNav = [
     name: "Vote",
     path: "/vote",
   },
-  {
-    name: "Login",
-    path: "/login",
-  },
 ];

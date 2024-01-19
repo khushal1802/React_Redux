@@ -40,7 +40,7 @@ export function* handle_Delete_product_api(action) {
         const res = yield call(delete_product, action); 
         const status = res.status;
         const data = res.data;
-        if (status === 201 || status === 200) {
+        if ( status === 200) {
             yield put({type:DELETE_PRODUCT_SUCCESS,data})
         } else {
             yield put({type:DELETE_PRODUCT_ERROR , data})

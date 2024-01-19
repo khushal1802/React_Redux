@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
 import logo from "./User/image/logo.png";
+import axios from "axios";
+import Cookies from "js-cookies";
+
 
 function UserLogin() {
   const cardNo = useRef();
@@ -11,23 +14,29 @@ function UserLogin() {
       cardNo: cardNo.current.value,
       password: password.current.value,
     };
-
     console.log(data);
+    // axios.post("http://13.235.248.55:8000/v1/login/user", data).then(
+    //   (res) => {
+    //   if (res.status === 200) {
+    //     const role = res.data.data.role;
+    //     Cookies.set("role", role);
+    //   }
+    // });
   };
 
   return (
     <>
       <section className="login position-relative">
-            <div className="shape"></div>
+        {/* <div className="shape"></div> */}
         <div className="container">
           <div className="background ">
             <div className="row">
-              <div className="col-6 d-flex align-items-center justify-content-center">
-                <img src={logo} alt="logo" />
-              </div>
               <div className="col-6">
                 <div className="user-login">
                   <form onSubmit={handleLogin} className="login-form">
+              <div className="col-6 d-flex align-items-center justify-content-center">
+                <img src={logo} alt="logo" />
+              </div>
                     <div className="form">
                       <h3 className="text-center mb-3">User Login</h3>
 

@@ -1,49 +1,36 @@
 {
   "posts": [
     {
-      "productName": "Omnis amet aute asp",
-      "price": "Fuga Error reiciend",
+      "fname": "Orla Harrison",
+      "lname": "Lara Ryan",
+      "email": "fepupepyqy@mailinator.com",
+      "number": "+1 (781) 152-3043",
+      "address": "Fuga Omnis veritati",
       "id": 1
     },
     {
-      "productName": "Quos quam et dolorib",
-      "price": "Labore et quidem mol",
+      "fname": "Lewis Contreras",
+      "lname": "Gray Dickerson",
+      "email": "lyly@mailinator.com",
+      "number": "+1 (602) 673-9201",
+      "address": "Dolor aperiam sit nu",
       "id": 2
     },
     {
-      "productName": "Autem labore quidem ",
-      "price": "Omnis facere incidun",
+      "fname": "Zephr Conner",
+      "lname": "Shafira Griffin",
+      "email": "pesijixej@mailinator.com",
+      "number": "+1 (209) 208-6618",
+      "address": "Anim illo deleniti n",
       "id": 3
     },
     {
-      "productName": "Reiciendis similique",
-      "price": "Consequat Et rerum ",
+      "fname": "Piper Hicks",
+      "lname": "Arthur Kramer",
+      "email": "gebufita@mailinator.com",
+      "number": "+1 (411) 527-7374",
+      "address": "Id qui sunt cum mo",
       "id": 4
-    },
-    {
-      "productName": "Rerum cumque dolores",
-      "price": "Consequat Recusanda",
-      "id": 5
-    },
-    {
-      "productName": "Quaerat sed omnis ut",
-      "price": "Saepe ullam ea magna",
-      "id": 6
-    },
-    {
-      "productName": "Placeat laborum vel",
-      "price": "Distinctio Dolore n",
-      "id": 7
-    },
-    {
-      "productName": "Inventore itaque sim",
-      "price": "At natus aut optio ",
-      "id": 8
-    },
-    {
-      "productName": "Illum ullamco cupid",
-      "price": "Dolores tempora enim",
-      "id": 9
     }
   ],
   "comments": [],
