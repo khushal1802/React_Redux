@@ -9,8 +9,8 @@ import {
 const Data = () => {
   const name = useRef();
   const price = useRef();
-  const product = useSelector((state) => state.productReducer);
   const [view, setview] = useState({});
+  const product = useSelector((state) => state.productReducer);
 
   const dispatch = useDispatch();
 

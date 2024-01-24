@@ -1,7 +1,20 @@
-import { delete_data_api, get_data_saga, post_data_saga, update_data_api } from "./root/rootData";
+import {
+  delete_election_saga,
+  update_election_saga,
+  get_election_saga,
+  post_election_saga,
+} from "./root/rootElection";
+
+import { delete_party_saga, get_party_saga, post_party_saga, update_party_saga } from "./root/rootParty";
 import { all } from "@redux-saga/core/effects";
 
-
-export function* rootsaga() {
-    yield all([get_data_saga(), post_data_saga(),delete_data_api(),update_data_api()])
+export function* rootSaga() {
+  yield all([get_election_saga(),
+    post_election_saga(),
+    delete_election_saga(),
+    update_election_saga(),
+    get_party_saga(),
+    post_party_saga(),
+    delete_party_saga(),
+    update_party_saga()])
 }

@@ -1,6 +1,16 @@
-export const BASE_URL = "http://localhost:3001"
+export const BASE_URL = "https://voater-backend-app.onrender.com/v1";
 
-export const GET_DATA_API = "/posts";
-export const POST_DATA_API = "/posts";
-export const DELETE_DATA_API = "/posts";
-export const UPDATE_DATA_API = "/posts";
+export const USER_LOGIN = "/login";
+export const ADMIN_LOGIN = "/login";
+
+
+
+export const GET_ELECTION_API = "/elelist";
+export const POST_ELECTION_API = "/ele";
+export const DELETE_ELECTION_API = "/eledel/";
+export const UPDATE_ELECTION_API = "/eleup/";
+
+export const GET_PARTY_API = "/pList";
+export const POST_PARTY_API = "/party";
+export const DELETE_PARTY_API = "/pdel/";
+export const UPDATE_PARTY_API = "/pup/";

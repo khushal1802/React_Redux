@@ -1,17 +1,21 @@
 import {
-  DELETE_DATA_ERROR,
-  DELETE_DATA_PROGRESS,
-  DELETE_DATA_SUCCESS,
-  GET_DATA_ERROR,
-  GET_DATA_PROGRESS,
-  GET_DATA_SUCCESS,
-  POST_DATA_ERROR,
-  POST_DATA_PROGRESS,
-  POST_DATA_SUCCESS,
-  UPDATE_DATA_ERROR,
-  UPDATE_DATA_PROGRESS,
-  UPDATE_DATA_SUCCESS,
-} from "../Action/Action";
+  DELETE_ELECTION_ERROR,
+  DELETE_ELECTION_PROGRESS,
+  DELETE_ELECTION_SUCCESS,
+
+  GET_ELECTION_ERROR,
+  GET_ELECTION_PROGRESS,
+  GET_ELECTION_SUCCESS,
+  
+  POST_ELECTION_ERROR,
+  POST_ELECTION_PROGRESS,
+  POST_ELECTION_SUCCESS,
+
+  UPDATE_ELECTION_ERROR,
+  UPDATE_ELECTION_PROGRESS,
+  UPDATE_ELECTION_SUCCESS,
+
+} from "../Election/ElectionAction";
 
 const initialState = {
   data: [],
@@ -19,93 +23,96 @@ const initialState = {
   isError: null,
 };
 
-const dataReducer = (state = { ...initialState }, action) => {
+const ElectionReducer = (state = { ...initialState }, action) => {
+  console.log(action);
   switch (action.type) {
-    case GET_DATA_PROGRESS:
+    case GET_ELECTION_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case GET_DATA_SUCCESS:
+    case GET_ELECTION_SUCCESS:
       return {
         ...state,
         isLoding: false,
-        data: action.data,
+        ELECTION: action.data.Data,
         isError: null,
       };
-    case GET_DATA_ERROR:
+    case GET_ELECTION_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case POST_DATA_PROGRESS:
+    case POST_ELECTION_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case POST_DATA_SUCCESS:
+    case POST_ELECTION_SUCCESS:
       return {
         ...state,
         isLoding: false,
         data: state.data.concat(action.data),
         isError: null,
       };
-    case POST_DATA_ERROR:
+    case POST_ELECTION_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case DELETE_DATA_PROGRESS:
+    case DELETE_ELECTION_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case DELETE_DATA_SUCCESS:
-      const filterData = state.data.filter((val) => val.id !== action.data);
+    case DELETE_ELECTION_SUCCESS:
+      const filterData = state.data.filter((val) => val._id !== action.data);
       return {
         ...state,
         isLoding: false,
-        data: filterData,
+        ELECTION: filterData,
         isError: null,
       };
-    case DELETE_DATA_ERROR:
+    case DELETE_ELECTION_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case UPDATE_DATA_PROGRESS:
+    case UPDATE_ELECTION_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case UPDATE_DATA_SUCCESS:
+    case UPDATE_ELECTION_SUCCESS:
       return {
         ...state,
         isLoding: false,
-        data: state.data.map((state) => 
+        data: state.data.map((state) =>
           state.id === action.data.id ? action.data : state
         ),
         isError: null,
       };
-    case UPDATE_DATA_ERROR:
+    case UPDATE_ELECTION_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
+
+
     default: {
       return { ...state };
     }
   }
 };
-export default dataReducer;
+export default ElectionReducer;
