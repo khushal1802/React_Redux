@@ -6,6 +6,9 @@ import {
   updateItem,
   deleteItem,
 } from "./firebase/functions/function";
+import Profile from "./Profile";
+import LogoutButton from "./Logout";
+import LoginButton from "./Login";
 
 function App() {
   const [data, setData] = useState([]);
@@ -57,6 +60,9 @@ function App() {
 
   return (
     <div className="App">
+      <LoginButton />
+      <LogoutButton />
+      <Profile />
       <div>
         First name:
         <input type="text" ref={fname} />
