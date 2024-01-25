@@ -36,7 +36,7 @@ const ElectionReducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isLoding: false,
-        ELECTION: action.data.Data,
+        data: action.data.Data,
         isError: null,
       };
     case GET_ELECTION_ERROR:
@@ -77,7 +77,7 @@ const ElectionReducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isLoding: false,
-        ELECTION: filterData,
+        data: filterData,
         isError: null,
       };
     case DELETE_ELECTION_ERROR:

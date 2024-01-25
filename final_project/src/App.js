@@ -34,7 +34,11 @@ function App() {
          <Sidebar />
          <Routes>
            <Route path="/" exact element={<AHome />}></Route>
-           <Route path="/Election" exact element={<Election />}></Route>
+           <Route
+             path="/Election"
+             exact
+             element={<Election />}
+           ></Route>
            <Route path="/Party" exact element={<Party />}></Route>
            <Route
              path="/PartyConnection"

@@ -17,7 +17,7 @@ const Election = useSelector((state) => state.ElectionReducer);
   useEffect(() => {
     dispatch({ type: GET_ELECTION_PROGRESS });
   }, []);
-  
+
   console.log(Election);
    const handalSubmit = () => {
      const data = {
@@ -127,7 +127,7 @@ const Election = useSelector((state) => state.ElectionReducer);
               </div>
 
               <div className="row">
-                {Election.ELECTION?.map((val, ind) => {
+                {Election.data?.map((val, ind) => {
                   return (
                     <div className="col-4" key={ind}>
                       <div class="card mt-5" style={{ width: "18rem" }}>
@@ -137,8 +137,8 @@ const Election = useSelector((state) => state.ElectionReducer);
                           <button onClick={() => handalDelete(val)}>
                             Delete
                           </button>
-                          <button onClick={() => setview(val)}>View</button>
-                          <button onClick={handalUpdate}>Update</button>
+                          {/* <button onClick={() => setview(val)}>View</button>
+                          <button onClick={handalUpdate}>Update</button> */}
                         </div>
                       </div>
                     </div>

@@ -58,11 +58,6 @@ function Navbar() {
           </div>
           <div className="collapse navbar-collapse" id="toggle-navbar">
             <ul className="navbar-nav ms-auto">
-              {/* <li class="nav-item">
-                <Link class="nav-link" href="#">
-                  Account
-                </Link>
-              </li> */}
               <li class="nav-item">
                 <button className="btn btn-dark" onClick={handleLogOut}>
                   Logout

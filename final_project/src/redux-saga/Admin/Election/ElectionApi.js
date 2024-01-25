@@ -11,7 +11,6 @@ export async function get_election_api() {
   return axios
     .get(BASE_URL + GET_ELECTION_API)
     .then((res) => {
-      console.log(res.data.Data);
       const data = res.data;
       const status = res.status;
       return { data, status };
