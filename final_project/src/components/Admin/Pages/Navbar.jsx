@@ -31,7 +31,11 @@ function Navbar() {
     <>
       <nav
         className="navbar navbar-expand-md"
-        style={{ boxShadow: "-12px 2px 20px -13px" }}
+        style={{
+          boxShadow: "-12px 2px 20px -13px",
+          backgroundColor: "#1A257E",
+          height: "115px"
+        }}
       >
         <div className="container-fluid mx-2">
           <div className="navbar-header">

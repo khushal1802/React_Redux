@@ -50,7 +50,9 @@ export function* handle_delete_election_api(action) {
 export function* handle_update_election_api(action) {
   try {
     const res = yield call(update_election_api, action);
+    console.log(res);
     const data = res.data;
+    console.log(data)
     const status = res.status;
     if (status === 200) {
       yield put({ type: UPDATE_ELECTION_SUCCESS, data });

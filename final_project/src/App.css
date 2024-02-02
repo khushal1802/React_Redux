@@ -1,8 +1,8 @@
 /*=========variable======*/
 :root {
   --bg--light: #22313f;
-  --primary: #B3CAFF;
-  --secondary: #0166d3;
+  --primary: #1A257E; 
+  --secondary: #B3CAFF;
   --font-color: #6c6b6d;
   --black: #000;
   --white: #fff;
@@ -163,7 +163,7 @@ img {
 }
 
 .vote:hover {
-  background-color: var(--primary);
+  background-color: var(--secondary);
   color: var(--black);
   transform: scale(1.1);
 }

@@ -28,13 +28,13 @@ function Sidebar() {
           </div>
         </div>
 
-        <div className="search position-relative text-center px-4 py-3 mt-2">
+        {/* <div className="search position-relative text-center px-4 py-3 mt-2">
           <input
             type="text"
             className="form-control w-100"
             placeholder="Search here"
           />
-        </div>
+        </div> */}
 
         <ul className="categories list-unstyled">
           <li className="has-dropdown">

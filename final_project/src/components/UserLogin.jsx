@@ -14,13 +14,11 @@ const UserLogin = () => {
   const MySwal = withReactContent(Swal);
 
   const email = useRef();
-  const name = useRef();
   const password = useRef();
 
   const handleLogin = () => {
     const data = {
       Email: email.current.value,
-      Name: name.current.value,
       Password: password.current.value,
     };
 
@@ -79,15 +77,6 @@ const UserLogin = () => {
                 ref={email}
                 className="form-control"
                 placeholder="Enter Your Email Id"
-              />
-            </div>
-            <div className="form-group">
-              <label>Username</label>
-              <input
-                type="text"
-                ref={name}
-                className="form-control"
-                placeholder="Enter Your Username"
               />
             </div>
             <div className="form-group">

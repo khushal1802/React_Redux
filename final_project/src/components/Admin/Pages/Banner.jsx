@@ -1,7 +1,6 @@
 import React from "react";
 import "../admin.css";
 import Cookies from "js-cookie";
-// import Data from "./Data";
 
 function Banner() {
   return (
@@ -14,7 +13,6 @@ function Banner() {
           </p>
         </div>
       </div>
-      {/* <Data /> */}
     </div>
   );
 }

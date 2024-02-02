@@ -24,7 +24,7 @@ const initialState = {
 };
 
 const ElectionReducer = (state = { ...initialState }, action) => {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case GET_ELECTION_PROGRESS:
       return {
@@ -56,7 +56,7 @@ const ElectionReducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isLoding: false,
-        data: state.data.concat(action.data),
+        data: state.data.concat(action.data.Data),
         isError: null,
       };
     case POST_ELECTION_ERROR:
@@ -73,11 +73,11 @@ const ElectionReducer = (state = { ...initialState }, action) => {
         isError: null,
       };
     case DELETE_ELECTION_SUCCESS:
-      const filterData = state.data.filter((val) => val._id !== action.data);
+      const filterElection = state.data.filter((val) => val._id !== action.data);
       return {
         ...state,
         isLoding: false,
-        data: filterData,
+        data: filterElection,
         isError: null,
       };
     case DELETE_ELECTION_ERROR:
@@ -94,12 +94,16 @@ const ElectionReducer = (state = { ...initialState }, action) => {
         isError: null,
       };
     case UPDATE_ELECTION_SUCCESS:
+      const updateData = state.data.map((item) =>
+        item._id === action.data.Data._id ? { ...state , ...action.data.Data } : item
+      );
+      console.log("action", action.data.Data);
+      console.log("updateData", state.data);
+      console.log("updateData", updateData);
       return {
         ...state,
         isLoding: false,
-        data: state.data.map((state) =>
-          state.id === action.data.id ? action.data : state
-        ),
+        data: updateData,
         isError: null,
       };
     case UPDATE_ELECTION_ERROR:

@@ -1,17 +1,17 @@
 import {
-  DELETE_PARTY_ERROR,
-  DELETE_PARTY_PROGRESS,
-  DELETE_PARTY_SUCCESS,
-  GET_PARTY_ERROR,
-  GET_PARTY_PROGRESS,
-  GET_PARTY_SUCCESS,
-  POST_PARTY_ERROR,
-  POST_PARTY_PROGRESS,
-  POST_PARTY_SUCCESS,
-  UPDATE_PARTY_ERROR,
-  UPDATE_PARTY_PROGRESS,
-  UPDATE_PARTY_SUCCESS,
-} from "../Party/PartyAction";
+  DELETE_USER_ERROR,
+  DELETE_USER_PROGRESS,
+  DELETE_USER_SUCCESS,
+  GET_USER_ERROR,
+  GET_USER_PROGRESS,
+  GET_USER_SUCCESS,
+  POST_USER_ERROR,
+  POST_USER_PROGRESS,
+  POST_USER_SUCCESS,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_PROGRESS,
+  UPDATE_USER_SUCCESS,
+} from "../User/UserAction";
 
 const initialState = {
   data: [],
@@ -19,92 +19,88 @@ const initialState = {
   isError: null,
 };
 
-const PartyReducer = (state = { ...initialState }, action) => {
-  console.log(action.data);
+const UserReducer = (state = { ...initialState }, action) => {
+  // console.log(action.payload,);
   switch (action.type) {
-    //PARTY
-    case GET_PARTY_PROGRESS:
+    //USER
+    case GET_USER_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case GET_PARTY_SUCCESS:
+    case GET_USER_SUCCESS:
       return {
         ...state,
         isLoding: false,
         data: action.data,
         isError: null,
       };
-    case GET_PARTY_ERROR:
+    case GET_USER_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case POST_PARTY_PROGRESS:
+    case POST_USER_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case POST_PARTY_SUCCESS:
+    case POST_USER_SUCCESS:
       return {
         ...state,
         isLoding: false,
         data: state.data.concat(action.data.Data),
         isError: null,
       };
-    case POST_PARTY_ERROR:
+    case POST_USER_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case DELETE_PARTY_PROGRESS:
+    case DELETE_USER_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case DELETE_PARTY_SUCCESS:
-      const filterParty = state.data.filter((val) => val._id !== action.data);
+    case DELETE_USER_SUCCESS:
+      const filterUSER = state.data.filter((val) => val._id !== action.data);
       return {
         ...state,
         isLoding: false,
-        data: filterParty,
+        data: filterUSER,
         isError: null,
       };
-    case DELETE_PARTY_ERROR:
+    case DELETE_USER_ERROR:
       return {
         ...state,
         isLoding: false,
         isError: action.data,
       };
 
-    case UPDATE_PARTY_PROGRESS:
+    case UPDATE_USER_PROGRESS:
       return {
         ...state,
         isLoding: true,
         isError: null,
       };
-    case UPDATE_PARTY_SUCCESS:
-     const updateData = state.data.map((item) =>
-       item.id === action.data.Data._id ? action.data.Data : item
-     );
-     console.log("updateData", action.data.Data);
-     console.log("updateData", state.data);
-     console.log("updateData", updateData);
-
+    case UPDATE_USER_SUCCESS:
+      const updateData = state.data.map((state) =>
+        state.id === action.data.id ? action.data : state
+      );
       return {
         ...state,
         isLoding: false,
         data: updateData,
         isError: null,
       };
-    case UPDATE_PARTY_ERROR:
+    case UPDATE_USER_ERROR:
       return {
         ...state,
         isLoding: false,
@@ -116,4 +112,4 @@ const PartyReducer = (state = { ...initialState }, action) => {
     }
   }
 };
-export default PartyReducer;
+export default UserReducer;

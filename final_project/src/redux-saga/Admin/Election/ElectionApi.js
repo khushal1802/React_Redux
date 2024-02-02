@@ -48,10 +48,15 @@ export function delete_election_api(action) {
 }
 
 export function update_election_api(action) {
+  const Update = {
+    ElectionName: action.payload.ElectionName,
+    RegisterDate: action.payload.RegisterDate,
+  };
   return axios
-    .put(BASE_URL + UPDATE_ELECTION_API+action.payload.id, action.payload)
-    .then((res) => {
-      const data = res.data;
+  .put(BASE_URL + UPDATE_ELECTION_API + action.payload._id, Update)
+  .then((res) => {
+      console.log(action.payload);
+      const data = res.data.Data;
       const status = res.status;
       return { data, status };
     })

@@ -1,122 +1,184 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import React, { useEffect, useRef, useState } from "react";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 import "../admin.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { DELETE_ELECTION_PROGRESS, GET_ELECTION_PROGRESS, POST_ELECTION_PROGRESS, UPDATE_ELECTION_PROGRESS } from '../../../redux-saga/Admin/Election/ElectionAction';
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  DELETE_ELECTION_PROGRESS,
+  GET_ELECTION_PROGRESS,
+  POST_ELECTION_PROGRESS,
+  UPDATE_ELECTION_PROGRESS,
+} from "../../../redux-saga/Admin/Election/ElectionAction";
+import Swal from "sweetalert2";
 
 function Election() {
-  const name = useRef()
+  const name = useRef();
   const date = useRef();
-  const [view, setview] = useState({});
-  
-const Election = useSelector((state) => state.ElectionReducer);
+  const [view, setView] = useState({});
+  const [viewModalVisible, setViewModalVisible] = useState(false);
+  const [isAdding, setIsAdding] = useState(true);
+
+  const Election = useSelector((state) => state.ElectionReducer);
   const dispatch = useDispatch();
+
+  console.log(view);
+
+  // ................./ GET /............................
 
   useEffect(() => {
     dispatch({ type: GET_ELECTION_PROGRESS });
   }, []);
 
-  console.log(Election);
-   const handalSubmit = () => {
-     const data = {
-       ElectionName: name.current.value,
-       RegisterDate: date.current.value,
-     };
-     dispatch({
-       type: POST_ELECTION_PROGRESS,
-       payload: data,
-     });
-   };
+  // ................./ INSERT /............................
 
-   const handalDelete = (val) => {
-     dispatch({
-       type: DELETE_ELECTION_PROGRESS,
-       payload: val,
-     });
-   };
+  const handleAddElection = () => {
+    const data = {
+      ElectionName: name.current.value,
+      RegisterDate: date.current.value,
+    };
 
-   const handal = (e) => {
-     setview((view) => ({
-       ...view,
-       [e.target.name]: e.target.value,
-     }));
-   };
+    dispatch({
+      type: POST_ELECTION_PROGRESS,
+      payload: data,
+    });
 
-   const handalUpdate = () => {
-     dispatch({ type: UPDATE_ELECTION_PROGRESS, payload: view });
+    Swal.fire({
+      title: "Election Added",
+      text: "Election added successfully",
+      icon: "success",
+    });
   };
-  
+
+  // ................./ DELETE /............................
+  const handleDeleteElection = (val) => {
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success",
+    });
+    dispatch({
+      type: DELETE_ELECTION_PROGRESS,
+      payload: val,
+    });
+  };
+
+  // ................./ UPDATE /............................
+
+  const handleViewElection = (val) => {
+    setView(val);
+    setIsAdding(false);
+    setViewModalVisible(true);
+  };
+
+  const handleInputChange = (e) => {
+    setView((prevView) => ({
+      ...prevView,
+      [e.target.name]: e.target.value,
+    }));
+  };
+ const handleUpdateElection = () => {
+   dispatch({
+     type: UPDATE_ELECTION_PROGRESS,
+     payload: view,
+   });
+
+   Swal.fire({
+     title: "Election Updated",
+     text: "Election updated successfully",
+     icon: "success",
+   });
+ };
   return (
     <>
       <div>
         <Sidebar />
         <div id="wrapper">
           <Navbar />
-          <div className="p-4">
+          <div className="container p-4">
             <section className="charts mt-4">
               <button
                 type="button"
-                class="button"
+                className="button mb-5"
                 data-bs-toggle="modal"
                 data-bs-target="#myModal"
+                onClick={() => setIsAdding(true)}
               >
                 Add +
               </button>
 
-              <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Create E-Election</h4>
+              <div
+                className={`modal ${viewModalVisible ? "show" : ""}`}
+                id="myModal"
+                tabIndex="-1"
+                role="dialog"
+                style={{ display: viewModalVisible ? "block" : "none" }}
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h4 className="modal-title">
+                        {isAdding ? "Create" : "Update"} E-Election
+                      </h4>
                       <button
                         type="button"
-                        class="btn-close"
+                        className="btn-close"
                         data-bs-dismiss="modal"
                       ></button>
                     </div>
 
-                    <div class="modal-body">
+                    <div className="modal-body">
                       <form>
                         E-Election Name:
                         <br />
                         <input
-                          className="mb-3"
+                          className="mb-3 fild"
                           type="text"
                           id="name"
-                          name="name"
+                          name="ElectionName"
                           ref={name}
-                          onChange={handal}
+                          onChange={handleInputChange}
+                          value={view.ElectionName}
                           style={{ width: "100%" }}
                         />
                         <br />
                         RegisterDate :
                         <br />
                         <input
-                          className="mb-3"
+                          className="mb-3 fild"
                           type="date"
                           id="logo"
-                          name="logo"
+                          name="RegisterDate"
                           ref={date}
-                          onChange={handal}
+                          onChange={handleInputChange}
+                          value={view.RegisterDate}
                           style={{ width: "100%" }}
                         />
                         <br />
                       </form>
                     </div>
 
-                    <div class="modal-footer">
-                      <input
-                        type="submit"
-                        class="vote m-2"
-                        value="Submit"
-                        onClick={handalSubmit}
-                      />
+                    <div className="modal-footer">
+                      {isAdding ? (
+                        <input
+                          type="submit"
+                          className="vote m-2"
+                          value="Submit"
+                          onClick={handleAddElection}
+                          data-bs-dismiss="modal"
+                        />
+                      ) : (
+                        <input
+                          type="submit"
+                          className="vote m-2"
+                          value="Update"
+                          onClick={handleUpdateElection}
+                          data-bs-dismiss="modal"
+                        />
+                      )}
 
                       <button
                         type="button"
-                        class="vote m-0"
+                        className="vote m-0"
                         data-bs-dismiss="modal"
                       >
                         Close
@@ -127,23 +189,44 @@ const Election = useSelector((state) => state.ElectionReducer);
               </div>
 
               <div className="row">
-                {Election.data?.map((val, ind) => {
-                  return (
-                    <div className="col-4" key={ind}>
-                      <div class="card mt-5" style={{ width: "18rem" }}>
-                        <div class="card-body">
-                          <h5 class="card-title">{val.ElectionName}</h5>
-                          <p class="card-text">{val.RegisterDate}</p>
-                          <button onClick={() => handalDelete(val)}>
+                <table
+                  className="table table-hover"
+                  style={{ boxShadow: "0px 3px 20px -15px" }}
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">ElectionName</th>
+                      <th scope="col">RegisterDate</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Election.data?.map((val, ind) => (
+                      <tr key={ind}>
+                        <td>{val.ElectionName}</td>
+                        <td>{val.RegisterDate}</td>
+                        <td>
+                          <button
+                            className="btn btn-dark"
+                            style={{ margin: "0px", marginRight: "15px" }}
+                            onClick={() => handleDeleteElection(val)}
+                          >
                             Delete
                           </button>
-                          {/* <button onClick={() => setview(val)}>View</button>
-                          <button onClick={handalUpdate}>Update</button> */}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                          <button
+                            className="btn btn-dark"
+                            style={{ margin: "0px" }}
+                            onClick={() => handleViewElection(val)}
+                            data-bs-toggle="modal"
+                            data-bs-target="#myModal"
+                          >
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
           </div>
@@ -153,4 +236,4 @@ const Election = useSelector((state) => state.ElectionReducer);
   );
 }
 
-export default Election
+export default Election;
