@@ -53,10 +53,9 @@ export function update_election_api(action) {
     RegisterDate: action.payload.RegisterDate,
   };
   return axios
-  .put(BASE_URL + UPDATE_ELECTION_API + action.payload._id, Update)
-  .then((res) => {
-      console.log(action.payload);
-      const data = res.data.Data;
+    .put(BASE_URL + UPDATE_ELECTION_API + action.payload._id, Update)
+    .then((res) => {
+      const data = action.payload;
       const status = res.status;
       return { data, status };
     })

@@ -164,7 +164,7 @@ function Party() {
                         E-Election Party Short Code:
                         <br />
                         <input
-                          className="mb-3 fild"
+                          className="mb-3"
                           type="text"
                           id="code"
                           name="shortCode"

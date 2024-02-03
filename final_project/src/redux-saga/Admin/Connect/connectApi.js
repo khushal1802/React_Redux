@@ -23,6 +23,12 @@ export async function get_connect_api() {
 }
 
 export function post_connect_api(action) {
+  console.log("post connect api", action.payload);
+  const connect = {
+    Election: action.payload.Election,
+    Party: action.payload.Party,
+  };
+  console.log(connect);
   return axios
     .post(BASE_URL + POST_CONNECT_API, action.payload)
     .then((res) => {

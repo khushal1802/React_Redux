@@ -55,20 +55,21 @@ export function delete_user_api(action) {
 
 export function update_user_api(action) {
   console.log(action.payload);
-  // const Update = {
-  //   Address: action.payload.Address,
-  //   CardNumber: action.payload,
-  //   DOB: action.payload.DOB,
-  //   Email: action.payload.Email,
-  //   Name: action.payload.Name,
-  //   Phone: action.payload.Phone,
-  //   Profile: action.payload.Profile,
-  //   Sex: action.payload.Sex,
-  // };
+  const Update = {
+    Address: action.payload.Address,
+    // Password:action.payload.Password,
+    CardNumber: action.payload,
+    DOB: action.payload.DOB,
+    Email: action.payload.Email,
+    Name: action.payload.Name,
+    Phone: action.payload.Phone,
+    Profile: action.payload.Profile,
+    Sex: action.payload.Sex,
+  };
   return axios
-    .put(BASE_URL + UPDATE_USER_API + action.payload._id,  action.payload)
+    .put(BASE_URL + UPDATE_USER_API + action.payload._id, Update)
     .then((res) => {
-      const data = res.data;
+      const data = Update;
       const status = res.status;
       return { data, status };
     })

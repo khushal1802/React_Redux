@@ -1,6 +1,20 @@
 import { call, put } from "redux-saga/effects";
-import {  delete_election_api,  get_election_api, post_election_api, update_election_api, } from "../../Admin/Election/ElectionApi";
-import { DELETE_ELECTION_ERROR, DELETE_ELECTION_SUCCESS, GET_ELECTION_ERROR, GET_ELECTION_SUCCESS, POST_ELECTION_ERROR, POST_ELECTION_SUCCESS, UPDATE_ELECTION_ERROR, UPDATE_ELECTION_SUCCESS, } from "../../Admin/Election/ElectionAction";
+import {
+  delete_election_api,
+  get_election_api,
+  post_election_api,
+  update_election_api,
+} from "../../Admin/Election/ElectionApi";
+import {
+  DELETE_ELECTION_ERROR,
+  DELETE_ELECTION_SUCCESS,
+  GET_ELECTION_ERROR,
+  GET_ELECTION_SUCCESS,
+  POST_ELECTION_ERROR,
+  POST_ELECTION_SUCCESS,
+  UPDATE_ELECTION_ERROR,
+  UPDATE_ELECTION_SUCCESS,
+} from "../../Admin/Election/ElectionAction";
 
 export function* handle_Get_election_api(action) {
   try {
@@ -50,9 +64,7 @@ export function* handle_delete_election_api(action) {
 export function* handle_update_election_api(action) {
   try {
     const res = yield call(update_election_api, action);
-    console.log(res);
     const data = res.data;
-    console.log(data)
     const status = res.status;
     if (status === 200) {
       yield put({ type: UPDATE_ELECTION_SUCCESS, data });

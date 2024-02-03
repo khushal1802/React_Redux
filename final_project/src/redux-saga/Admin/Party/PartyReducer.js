@@ -91,19 +91,20 @@ const PartyReducer = (state = { ...initialState }, action) => {
         isError: null,
       };
     case UPDATE_PARTY_SUCCESS:
-     const updateData = state.data.map((item) =>
-       item.id === action.data.Data._id ? action.data.Data : item
-     );
-     console.log("updateData", action.data.Data);
-     console.log("updateData", state.data);
-     console.log("updateData", updateData);
+      const updatedData = state.data.map((item) =>
+        item._id === action.data._id ? action.data : item
+      );
+
+      console.log("action", action.data);
+      console.log("updatedData", updatedData);
 
       return {
         ...state,
-        isLoding: false,
-        data: updateData,
+        isLoading: false,
+        data: updatedData,
         isError: null,
       };
+
     case UPDATE_PARTY_ERROR:
       return {
         ...state,

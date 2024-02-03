@@ -69,7 +69,13 @@ function User() {
   };
 
   const handleViewUser = (val) => {
-    setView(val);
+     const formattedDate = val.RegisterDate
+       ? new Date(val.RegisterDate).toISOString().split("T")[0]
+       : "";
+    setView({
+      ...val,
+      RegisterDate: formattedDate,
+    });
     setIsAdding(false);
     setViewModalVisible(true);
   };
@@ -249,7 +255,7 @@ function User() {
                     Address:
                     <textarea
                       className="mb-3 fild"
-                      type="email"
+                      type="text"
                       id="address"
                       name="Address"
                       onChange={handleInputChange}
@@ -300,7 +306,7 @@ function User() {
                   <th scope="col">Card Number</th>
                   <th scope="col">Gender</th>
                   <th scope="col">Profile</th>
-                  <th scope="col">DOB</th>
+                  <th scope="col">DOB (mm/dd/yyyy)</th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
                   <th scope="col">Address</th>
@@ -324,7 +330,9 @@ function User() {
                         }}
                       />
                     </td>
-                    <td>{val.DOB}</td>
+                    <td>
+                      {new Date(val.DOB).toLocaleDateString("en-US")}
+                    </td>
                     <td>{val.Phone}</td>
                     <td>{val.Email}</td>
                     <td>{val.Address}</td>

@@ -25,20 +25,21 @@ function Connection() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({ type: GET_CONNECT_PROGRESS });
     dispatch({ type: GET_PARTY_PROGRESS });
     dispatch({ type: GET_ELECTION_PROGRESS });
-    dispatch({ type: GET_CONNECT_PROGRESS });
   }, []);
 
   const inputHandel = (e) => {
     setData({ ...Data, [e.target.name]: e.target.value });
   };
 
+  console.log(Connect);
   const handleConectParty = () => {
     if (Data.election && Data.party) {
       const payload = {
-        election: Data.election,
-        party: Data.party,
+        Election: Data.election,
+        Party: Data.party,
       };
 
       dispatch({ type: POST_CONNECT_PROGRESS, payload });

@@ -21,15 +21,9 @@ function Election() {
   const Election = useSelector((state) => state.ElectionReducer);
   const dispatch = useDispatch();
 
-  console.log(view);
-
-  // ................./ GET /............................
-
   useEffect(() => {
     dispatch({ type: GET_ELECTION_PROGRESS });
   }, []);
-
-  // ................./ INSERT /............................
 
   const handleAddElection = () => {
     const data = {
@@ -47,9 +41,12 @@ function Election() {
       text: "Election added successfully",
       icon: "success",
     });
+
+    name.current.value = "";
+    date.current.value = "";
+    setView({});
   };
 
-  // ................./ DELETE /............................
   const handleDeleteElection = (val) => {
     Swal.fire({
       title: "Deleted!",
@@ -62,10 +59,16 @@ function Election() {
     });
   };
 
-  // ................./ UPDATE /............................
-
   const handleViewElection = (val) => {
-    setView(val);
+    const formattedDate = val.RegisterDate
+      ? new Date(val.RegisterDate).toISOString().split("T")[0]
+      : "";
+
+    setView({
+      ...val,
+      RegisterDate: formattedDate,
+    });
+
     setIsAdding(false);
     setViewModalVisible(true);
   };
@@ -76,18 +79,28 @@ function Election() {
       [e.target.name]: e.target.value,
     }));
   };
- const handleUpdateElection = () => {
-   dispatch({
-     type: UPDATE_ELECTION_PROGRESS,
-     payload: view,
-   });
 
-   Swal.fire({
-     title: "Election Updated",
-     text: "Election updated successfully",
-     icon: "success",
-   });
- };
+  const handleUpdateElection = () => {
+    const updatedView = {
+      ...view,
+    };
+
+    dispatch({
+      type: UPDATE_ELECTION_PROGRESS,
+      payload: updatedView,
+    });
+
+    Swal.fire({
+      title: "Election Updated",
+      text: "Election updated successfully",
+      icon: "success",
+    });
+
+    // Clear input fields and close modal
+    setView({});
+    setViewModalVisible(false);
+  };
+
   return (
     <>
       <div>
@@ -196,7 +209,7 @@ function Election() {
                   <thead>
                     <tr>
                       <th scope="col">ElectionName</th>
-                      <th scope="col">RegisterDate</th>
+                      <th scope="col">RegisterDate (mm/dd/yyyy)</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
@@ -204,7 +217,12 @@ function Election() {
                     {Election.data?.map((val, ind) => (
                       <tr key={ind}>
                         <td>{val.ElectionName}</td>
-                        <td>{val.RegisterDate}</td>
+                        <td>
+                          {new Date(val.RegisterDate).toLocaleDateString(
+                            "en-US"
+                          )}
+                        </td>
+
                         <td>
                           <button
                             className="btn btn-dark"
