@@ -1,10 +1,7 @@
 import React, { useRef } from "react";
 import logo from "./User/image/logo.png";
 import side from "./User/image/side.png";
-// import "./User/User-tool/User.css";
-// import "./User/User-tool/userResponsive.css";
 import axios from "axios";
-import { BASE_URL, USER_LOGIN } from "../redux-saga/constant";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -32,6 +29,7 @@ const UserLogin = () => {
         Cookies.set("Role", id);
         Cookies.set("_id", res.data.data._id);
         Cookies.set("Name", res.data.data.Name);
+        Cookies.set("CardNo", res.data.data.CardNumber);
         Cookies.set("Profile", res.data.data.Profile);
 
         Swal.fire({
@@ -39,7 +37,7 @@ const UserLogin = () => {
           text: "You clicked the button!",
           icon: "success",
         });
-        window.location = "/";
+        window.location = "/home";
       })
       .catch((error) => {
         console.log(error);
@@ -50,7 +48,7 @@ const UserLogin = () => {
           confirmButtonText: "OK",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "/";
+            window.location = "/login";
           }
         });
       });

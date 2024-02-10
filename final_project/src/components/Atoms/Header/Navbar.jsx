@@ -30,8 +30,8 @@ const Navbar = ({ data }) => {
   return (
     <>
       <div className="container">
-        <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-lg">
+          <a className="navbar-brand" href="#">
             <img
               src={logo}
               alt="Logo"
@@ -41,7 +41,7 @@ const Navbar = ({ data }) => {
             />
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -50,23 +50,23 @@ const Navbar = ({ data }) => {
             aria-label="Toggle navigation"
           >
             <span
-              class="navbar-toggler-icon"
+              className="navbar-toggler-icon"
               style={{ background: "black", borderRadius: "10px" }}
             ></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               {data?.map((val, ind) => {
                 return (
                   <li className="nav-item active" key={ind}>
-                    <Link to={`${val.path}`} className="nav-link">
+                    <Link to={val.path} className="nav-link">
                       {val.name}
                     </Link>
                   </li>
                 );
               })}
-              <li class="nav-item">
-                <a class="nav-link ms-5" href="#" tabindex="-1" aria-disabled="true">
+              <li className="nav-item">
+                <a className="nav-link ms-5" href="#" tabindex="-1" aria-disabled="true">
                   <img
                     className="rounded-circle img-fluid m-2"
                     width="35"

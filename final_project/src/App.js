@@ -14,6 +14,7 @@ import Election from "./components/Admin/Pages/Election";
 import Party from "./components/Admin/Pages/Party";
 import Connection from "./components/Admin/Pages/Connection";
 import Cookies from "js-cookie";
+import User from "./components/Admin/Pages/User";
 
 function App() {
   const role = Cookies.get("Role")
@@ -23,7 +24,7 @@ function App() {
      console.log("hello");
      return (
        <Routes>
-         <Route path="/" element={<UserLogin />} />
+         <Route path="/login" element={<UserLogin />} />
          <Route path="*" element={<UserLogin />} />
          <Route path="/admin" element={<AdminLogin />} />
        </Routes>
@@ -33,19 +34,15 @@ function App() {
        <div className="admin-app">
          <Sidebar />
          <Routes>
-           <Route path="/" exact element={<AHome />}></Route>
-           <Route
-             path="/Election"
-             exact
-             element={<Election />}
-           ></Route>
+           <Route path="/AHome" exact element={<AHome />}></Route>
+           <Route path="/Election" exact element={<Election />}></Route>
            <Route path="/Party" exact element={<Party />}></Route>
            <Route
              path="/PartyConnection"
              exact
              element={<Connection />}
            ></Route>
-           {/* <Route path="/:id" element={<Result />}></Route> */}
+           <Route path="/User" exact element={<User />}></Route>
          </Routes>
        </div>
      );
@@ -54,7 +51,7 @@ function App() {
        <div className="user-app">
          <Navbar data={userNav} />
          <Routes>
-           <Route path="/" element={<Home />} />
+           <Route path="/home" element={<Home />} />
            <Route path="/vote" element={<Vote />} />
            {/* <Route path="/profile" element={<UserProfile />} /> */}
          </Routes>

@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const PartyReducer = (state = { ...initialState }, action) => {
-  console.log(action.data);
+  // console.log(action.data);
   switch (action.type) {
     //PARTY
     case GET_PARTY_PROGRESS:

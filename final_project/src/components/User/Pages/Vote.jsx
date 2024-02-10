@@ -1,91 +1,113 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_PARTY_PROGRESS } from "../../../redux-saga/Admin/Party/PartyAction";
-import { GET_ELECTION_PROGRESS } from "../../../redux-saga/Admin/Election/ElectionAction";
 import {
-  DELETE_VOTE_PROGRESS,
   GET_VOTE_PROGRESS,
   POST_VOTE_PROGRESS,
 } from "../../../redux-saga/User/Vote/VoteAction";
 import Swal from "sweetalert2";
+import { GET_CONNECT_PROGRESS } from "../../../redux-saga/Admin/Connect/connectAction";
+import Cookies from "js-cookie";
 
 function Vote() {
-  const [Data, setData] = useState({
-    election: "",
-    party: "",
+  const [vote, setvote] = useState({
+    
   });
+  const [ChakeVote, setChakeVote] = useState(false);
 
-  const Party = useSelector((state) => state.PartyReducer);
-  const Election = useSelector((state) => state.ElectionReducer);
-  const Vote = useSelector((state) => state.VoteReducer);
+  const userId = Cookies.get("_id");
+  console.log(userId);
+  const CARDNUMBER = Cookies.get("cardNo");
 
   const dispatch = useDispatch();
+  const Connect = useSelector((state) => state.ConnectReducer);
+  const Vote = useSelector((state) => state.VoteReducer);
 
-  useEffect(() => {
-    dispatch({ type: GET_PARTY_PROGRESS });
-    dispatch({ type: GET_ELECTION_PROGRESS });
-    dispatch({ type: GET_VOTE_PROGRESS });
-  }, []);
+  const GetVoteList = async () => {
+    const auth = [];
+    const VoteData = Vote.data;
 
-  const inputHandel = (e) => {
-    setData({ ...Data, [e.target.name]: e.target.value });
+    VoteData.map((val, ind) => {
+      return auth.push(val.Auth.CardNumber);
+    });
+    if (auth.includes(CARDNUMBER)) {
+      setChakeVote(true);
+    } else {
+      setChakeVote(false);
+    }
+    console.log(ChakeVote);
+    console.log(auth);
   };
 
-  const handleConectParty = () => {
-    if (Data.election && Data.party) {
-      const payload = {
-        election: Data.election,
-        party: Data.party,
-      };
+  useEffect(() => {
+    dispatch({ type: GET_CONNECT_PROGRESS });
+    dispatch({ type: GET_VOTE_PROGRESS });
+    GetVoteList();
+  }, []);
 
-      dispatch({ type: POST_VOTE_PROGRESS, payload });
+  const fetchData = (index) => {
+    let data = {
+      Auth: userId,
+      Party: Connect.data[index].Party._id,
+      // Election: Connect.data[index].Election._id,
+    };
+    console.log(data);
+    setvote({ ...vote, ...data });
+  };
 
-      setData((prevData) => ({
-        ...prevData,
-        party: "",
-      }));
-
+  console.log(vote);
+  const submitVote = () => {
+    if (vote == null) {
       Swal.fire({
-        title: "Connected!",
-        text: "Party connected successfully",
-        icon: "success",
+        title: "Please Select a Particular Party !",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonText: "Sure",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location = "/login";
+        }
       });
     } else {
       Swal.fire({
-        title: "Error!",
-        text: "Please select both election and party",
-        icon: "error",
+        title: "Your Vote Is Successfully Submitted !",
+        text: "You have submitted a vote ?",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "Thank You For Voting",
+        cancelButtonText: "No, cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch({ type: POST_VOTE_PROGRESS, payload: vote });
+          handleConformClick();
+        }
       });
     }
   };
 
-  const handalDelete = (val) => {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success",
-    });
-    dispatch({
-      type: DELETE_VOTE_PROGRESS,
-      payload: val,
-    });
+  const handleConformClick = () => {
+    Cookies.remove("role");
+    Cookies.remove("name");
+    Cookies.remove("_id");
+    Cookies.remove("cardNo");
+    window.location = "/";
   };
 
   return (
     <>
       <div>
         <div className="container">
-            <div className="p-4">
-              <section className="charts mt-4">
-                <div className="row">
+          <div className="p-4">
+            <section className="charts mt-4">
+              <div className="row">
+                <div className="container">
                   <table
                     className="table table-hover"
                     style={{ boxShadow: "0px 3px 20px -15px" }}
                   >
                     <thead>
                       <tr>
-                        <th scope="col">ElectionName</th>
-                        <th scope="col">RegisterDate</th>
+                        {/* <th scope="col">ElectionName</th>
+                        <th scope="col">RegisterDate</th> */}
                         <th scope="col">Party Name</th>
                         <th scope="col">Logo</th>
                         <th scope="col">Short Code</th>
@@ -93,10 +115,14 @@ function Vote() {
                       </tr>
                     </thead>
                     <tbody>
-                      {Vote.data?.map((val, ind) => (
+                      {Connect.data?.map((val, ind) => (
                         <tr key={ind}>
-                          <td>{val.Election.ElectionName}</td>
-                          <td>{val.Election.RegisterDate}</td>
+                          {/* <td>{val.Election.ElectionName}</td>
+                          <td>
+                            {new Date(
+                              val.Election.RegisterDate
+                            ).toLocaleDateString("en-US")}
+                          </td> */}
                           <td>{val.Party.pName}</td>
                           <td>
                             <img
@@ -107,21 +133,25 @@ function Vote() {
                           </td>
                           <td>{val.Party.shortCode}</td>
                           <td>
-                            <button
-                              className="btn btn-dark"
-                              style={{ margin: "0px", marginRight: "15px" }}
-                              onClick={() => handalDelete(val)}
-                            >
-                              Delete
-                            </button>
+                            <input
+                              type="radio"
+                              name="party"
+                              onChange={() => fetchData(ind)}
+                            />
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                  <div style={{ display: "flex", justifyContent: "end" }}>
+                    <button onClick={submitVote} className="button">
+                      Submit
+                    </button>
+                  </div>
                 </div>
-              </section>
-            </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </>

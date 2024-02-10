@@ -1,7 +1,7 @@
 export const adminNav = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/AHome",
   },
   {
     name: "List",

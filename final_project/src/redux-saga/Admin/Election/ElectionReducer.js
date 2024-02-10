@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const ElectionReducer = (state = { ...initialState }, action) => {
-  console.log(action, "action reducer");
+  // console.log(action, "action reducer");
   switch (action.type) {
     case GET_ELECTION_PROGRESS:
       return {

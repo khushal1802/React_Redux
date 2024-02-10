@@ -30,12 +30,14 @@ const UserReducer = (state = { ...initialState }, action) => {
         isError: null,
       };
     case GET_USER_SUCCESS:
+      const UserData = action.data.filter((val) => val.Role === "user");
       return {
         ...state,
         isLoding: false,
-        data: action.data,
+        data: UserData,
         isError: null,
       };
+
     case GET_USER_ERROR:
       return {
         ...state,

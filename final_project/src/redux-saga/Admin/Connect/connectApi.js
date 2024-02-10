@@ -49,7 +49,7 @@ export function delete_connect_api(action) {
     .then((res) => {
       console.log(action.payload._id);
 
-      const data = action.payload;
+      const data = action.payload._id;
       const status = res.status;
       return { data, status };
     })

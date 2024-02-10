@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import "../admin.css";
 import Cookies from "js-cookie";
 
-
 function Sidebar() {
-
   return (
     <>
       <aside
@@ -38,7 +36,7 @@ function Sidebar() {
 
         <ul className="categories list-unstyled">
           <li className="has-dropdown">
-            <Link to={"/"} class="nav-link">
+            <Link to={"/AHome"} class="nav-link">
               {" "}
               Dashboard
             </Link>
@@ -56,6 +54,11 @@ function Sidebar() {
           <li className="has-dropdown">
             <Link to={"/PartyConnection"} class="nav-link">
               Party Connection
+            </Link>
+          </li>
+          <li className="has-dropdown">
+            <Link to={"/User"} class="nav-link">
+              User
             </Link>
           </li>
         </ul>

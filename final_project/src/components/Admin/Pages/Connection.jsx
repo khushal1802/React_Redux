@@ -10,7 +10,6 @@ import {
   POST_CONNECT_PROGRESS,
 } from "../../../redux-saga/Admin/Connect/connectAction";
 import Swal from "sweetalert2";
-import axios from "axios";
 
 function Connection() {
   const [Data, setData] = useState({
@@ -34,7 +33,6 @@ function Connection() {
     setData({ ...Data, [e.target.name]: e.target.value });
   };
 
-  console.log(Connect);
   const handleConectParty = () => {
     if (Data.election && Data.party) {
       const payload = {
@@ -43,11 +41,6 @@ function Connection() {
       };
 
       dispatch({ type: POST_CONNECT_PROGRESS, payload });
-
-      setData((prevData) => ({
-        ...prevData,
-        party: "",
-      }));
 
       Swal.fire({
         title: "Connected!",
@@ -149,7 +142,11 @@ function Connection() {
                       {Connect.data?.map((val, ind) => (
                         <tr key={ind}>
                           <td>{val.Election.ElectionName}</td>
-                          <td>{val.Election.RegisterDate}</td>
+                          <td>
+                            {new Date(
+                              val.Election.RegisterDate
+                            ).toLocaleDateString("en-US")}
+                          </td>
                           <td>{val.Party.pName}</td>
                           <td>
                             <img

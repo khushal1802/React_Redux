@@ -8,7 +8,6 @@ import {
   POST_CONNECT_ERROR,
   POST_CONNECT_PROGRESS,
   POST_CONNECT_SUCCESS,
-
 } from "../Connect/connectAction.js";
 
 const initialState = {
@@ -80,7 +79,7 @@ const ConnectReducer = (state = { ...initialState }, action) => {
         ...state,
         isLoding: false,
         isError: action.data,
-          };
+      };
     default: {
       return { ...state };
     }

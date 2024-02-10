@@ -1,7 +1,7 @@
 export const userNav = [
   {
     name: "Home",
-    path: "/",
+    path: "/home",
   },
   {
     name: "Vote",

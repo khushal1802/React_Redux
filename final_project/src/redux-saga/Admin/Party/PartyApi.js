@@ -53,15 +53,16 @@ export function delete_party_api(action) {
 
 export function update_party_api(action) {
   console.log(action.payload);
-    const formData = new FormData();
-    formData.append("pName", action.payload.pName);
-    formData.append("shortCode", action.payload.shortCode);
-    formData.append("Profile", action.payload.Profile[0]);
+  const formData = new FormData();
+  formData.append("pName", action.payload.pName);
+  formData.append("shortCode", action.payload.shortCode);
+  formData.append("Profile", action.payload.Profile[0]);
 
- return axios
+  return axios
     .put(BASE_URL + UPDATE_PARTY_API + action.payload._id, formData)
     .then((res) => {
-      const data = action.payload;
+      console.log(res.data.Data);
+      const data = res.data;
       const status = res.status;
       return { data, status };
     })

@@ -1,9 +1,8 @@
-import React from "react"
+import React from "react";
 import Sidebar from "./Sidebar";
 // import Card from "./Card";
 import Navbar from "./Navbar";
 import Banner from "./Banner";
-import User from "./User";
 
 function AHome() {
   return (
@@ -15,11 +14,8 @@ function AHome() {
           <Banner />
           <section className="charts mt-4">
             <div className="row">
-              <div className="col-lg-6">
-                {/* <Card /> */}
-              </div>
+              <div className="col-lg-6">{/* <Card /> */}</div>
             </div>
-              <User />
           </section>
         </div>
       </div>

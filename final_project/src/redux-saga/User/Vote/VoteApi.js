@@ -25,6 +25,7 @@ export function post_vote_api(action) {
   return axios
     .post(BASE_URL + POST_VOTE_API, action.payload)
     .then((res) => {
+      console.log(res);
       console.log(action.payload);
       const data = res.data;
       const status = res.status;
